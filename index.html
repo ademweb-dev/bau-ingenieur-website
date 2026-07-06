@@ -32,9 +32,15 @@
       <a href="#services" onclick="closeMenu()" data-i18n="nav_services">Leistungen</a>
       <a href="#projects" onclick="closeMenu()" data-i18n="nav_projects">Projekte</a>
       <a href="#contact" onclick="closeMenu()" data-i18n="nav_contact">Kontakt</a>
+
+      <div class="language-switcher mobile-language">
+        <button type="button" onclick="setLanguage('de')">DE</button>
+        <button type="button" onclick="setLanguage('en')">EN</button>
+        <button type="button" onclick="setLanguage('tr')">TR</button>
+      </div>
     </nav>
 
-    <div class="language-switcher">
+    <div class="language-switcher desktop-language">
       <button type="button" onclick="setLanguage('de')">DE</button>
       <button type="button" onclick="setLanguage('en')">EN</button>
       <button type="button" onclick="setLanguage('tr')">TR</button>
@@ -243,6 +249,16 @@
       Hamburg, Deutschland
     </p>
 
+    <div class="legal-links">
+      <button type="button" onclick="openLegalModal('impressum')" data-i18n="footer_impressum">
+        Impressum
+      </button>
+      <span>|</span>
+      <button type="button" onclick="openLegalModal('privacy')" data-i18n="footer_privacy">
+        Datenschutz
+      </button>
+    </div>
+
     <p class="designer-credit">
       <span data-i18n="footer_created">Website erstellt von</span>
       <a href="https://www.fiverr.com/ademwebdesign" target="_blank">
@@ -262,6 +278,16 @@
     <button type="button" onclick="acceptCookies()" data-i18n="cookie_button">
       Verstanden
     </button>
+  </div>
+
+  <div class="legal-modal" id="legalModal">
+    <div class="legal-modal-content">
+      <button class="legal-close" type="button" onclick="closeLegalModal()">×</button>
+
+      <h2 id="legalTitle">Impressum</h2>
+
+      <div class="legal-text" id="legalText"></div>
+    </div>
   </div>
 
   <script src="script.js"></script>

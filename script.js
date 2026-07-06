@@ -54,6 +54,8 @@ const translations = {
 
     footer_rights: "© 2026 ECB Bau. Alle Rechte vorbehalten.",
     footer_location: "Hamburg, Deutschland",
+    footer_impressum: "Impressum",
+    footer_privacy: "Datenschutz",
     footer_created: "Website erstellt von",
 
     cookie_title: "Cookie-Hinweis",
@@ -117,6 +119,8 @@ const translations = {
 
     footer_rights: "© 2026 ECB Bau. All rights reserved.",
     footer_location: "Hamburg, Germany",
+    footer_impressum: "Legal Notice",
+    footer_privacy: "Privacy Policy",
     footer_created: "Website created by",
 
     cookie_title: "Cookie Notice",
@@ -180,6 +184,8 @@ const translations = {
 
     footer_rights: "© 2026 ECB Bau. Tüm hakları saklıdır.",
     footer_location: "Hamburg, Almanya",
+    footer_impressum: "Künye / Yasal Bilgiler",
+    footer_privacy: "Gizlilik Politikası",
     footer_created: "Web sitesi",
 
     cookie_title: "Çerez Bildirimi",
@@ -189,7 +195,67 @@ const translations = {
   }
 };
 
+const legalContent = {
+  de: {
+    impressumTitle: "Impressum",
+    impressumText: `
+      <p><strong>Angaben gemäß § 5 TMG</strong></p>
+      <p><strong>ECB Bau</strong><br>Hamburg, Deutschland</p>
+      <p><strong>Kontakt</strong><br>Telefon / WhatsApp: +49 176 34509138<br>E-Mail: emre.canbulut@icloud.com</p>
+      <p>Weitere Pflichtangaben wie vollständige Anschrift, vertretungsberechtigte Person und ggf. Steuernummer werden ergänzt, sobald diese Informationen vorliegen.</p>
+    `,
+    privacyTitle: "Datenschutz",
+    privacyText: `
+      <p><strong>Datenschutzerklärung</strong></p>
+      <p>Diese Website verwendet keine Analyse-Tools und keine Marketing-Cookies.</p>
+      <p>Es werden nur technisch notwendige Daten verarbeitet, die für den Betrieb der Website erforderlich sind.</p>
+      <p>Bei Kontaktaufnahme per E-Mail, Telefon oder WhatsApp werden die übermittelten Daten ausschließlich zur Bearbeitung der Anfrage genutzt.</p>
+      <p>Weitere Angaben zum Hosting und zur verantwortlichen Stelle werden ergänzt, sobald die vollständigen Unternehmensdaten vorliegen.</p>
+    `
+  },
+
+  en: {
+    impressumTitle: "Legal Notice",
+    impressumText: `
+      <p><strong>Information according to § 5 TMG</strong></p>
+      <p><strong>ECB Bau</strong><br>Hamburg, Germany</p>
+      <p><strong>Contact</strong><br>Phone / WhatsApp: +49 176 34509138<br>Email: emre.canbulut@icloud.com</p>
+      <p>Additional required information such as full business address, authorised representative and tax information will be added once available.</p>
+    `,
+    privacyTitle: "Privacy Policy",
+    privacyText: `
+      <p><strong>Privacy Policy</strong></p>
+      <p>This website does not use analytics tools or marketing cookies.</p>
+      <p>Only technically necessary data is processed to ensure the functionality of the website.</p>
+      <p>When contacting us by email, phone or WhatsApp, the submitted data is used only to process the request.</p>
+      <p>Further information regarding hosting and the responsible party will be added once the complete company details are available.</p>
+    `
+  },
+
+  tr: {
+    impressumTitle: "Künye / Yasal Bilgiler",
+    impressumText: `
+      <p><strong>§ 5 TMG uyarınca bilgiler</strong></p>
+      <p><strong>ECB Bau</strong><br>Hamburg, Almanya</p>
+      <p><strong>İletişim</strong><br>Telefon / WhatsApp: +49 176 34509138<br>E-posta: emre.canbulut@icloud.com</p>
+      <p>Tam adres, yetkili kişi ve gerekli vergi bilgileri gibi ek yasal bilgiler, bu bilgiler mevcut olduğunda eklenecektir.</p>
+    `,
+    privacyTitle: "Gizlilik Politikası",
+    privacyText: `
+      <p><strong>Gizlilik Politikası</strong></p>
+      <p>Bu web sitesi analiz araçları veya pazarlama çerezleri kullanmaz.</p>
+      <p>Yalnızca web sitesinin çalışması için teknik olarak gerekli veriler işlenir.</p>
+      <p>E-posta, telefon veya WhatsApp üzerinden iletişime geçildiğinde gönderilen bilgiler sadece talebin işlenmesi için kullanılır.</p>
+      <p>Hosting ve sorumlu kişi/kurum ile ilgili ek bilgiler, şirket bilgileri tamamlandığında eklenecektir.</p>
+    `
+  }
+};
+
+let currentLanguage = localStorage.getItem("selectedLanguage") || "de";
+
 function setLanguage(language) {
+  currentLanguage = language;
+
   const elements = document.querySelectorAll("[data-i18n]");
 
   elements.forEach((element) => {
@@ -202,22 +268,30 @@ function setLanguage(language) {
 
   document.documentElement.lang = language;
   localStorage.setItem("selectedLanguage", language);
+  closeMenu();
 }
 
-const savedLanguage = localStorage.getItem("selectedLanguage");
-
-if (savedLanguage) {
-  setLanguage(savedLanguage);
-}
+setLanguage(currentLanguage);
 
 function toggleMenu() {
   const navMenu = document.getElementById("navMenu");
+  const menuToggle = document.querySelector(".menu-toggle");
+
   navMenu.classList.toggle("active");
+  menuToggle.classList.toggle("active");
 }
 
 function closeMenu() {
   const navMenu = document.getElementById("navMenu");
-  navMenu.classList.remove("active");
+  const menuToggle = document.querySelector(".menu-toggle");
+
+  if (navMenu) {
+    navMenu.classList.remove("active");
+  }
+
+  if (menuToggle) {
+    menuToggle.classList.remove("active");
+  }
 }
 
 const animatedElements = document.querySelectorAll(
@@ -254,5 +328,37 @@ window.addEventListener("load", () => {
 
   if (cookieBanner && cookiesAccepted !== "true") {
     cookieBanner.classList.add("show");
+  }
+});
+
+function openLegalModal(type) {
+  const modal = document.getElementById("legalModal");
+  const title = document.getElementById("legalTitle");
+  const text = document.getElementById("legalText");
+  const content = legalContent[currentLanguage];
+
+  if (type === "impressum") {
+    title.textContent = content.impressumTitle;
+    text.innerHTML = content.impressumText;
+  }
+
+  if (type === "privacy") {
+    title.textContent = content.privacyTitle;
+    text.innerHTML = content.privacyText;
+  }
+
+  modal.classList.add("show");
+}
+
+function closeLegalModal() {
+  const modal = document.getElementById("legalModal");
+  modal.classList.remove("show");
+}
+
+window.addEventListener("click", (event) => {
+  const modal = document.getElementById("legalModal");
+
+  if (event.target === modal) {
+    closeLegalModal();
   }
 });
