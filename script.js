@@ -47,8 +47,14 @@ const translations = {
     contact_title: "Lassen Sie uns über Ihr Bauprojekt sprechen.",
     contact_text:
       "Kontaktieren Sie ECB Bau direkt per Telefon, WhatsApp oder E-Mail.",
+    phone_label: "Telefon / WhatsApp",
+    email_label: "E-Mail",
     whatsapp_btn: "WhatsApp schreiben",
     email_btn: "E-Mail senden",
+
+    footer_rights: "© 2026 ECB Bau. Alle Rechte vorbehalten.",
+    footer_location: "Hamburg, Deutschland",
+    footer_created: "Website erstellt von",
 
     cookie_title: "Cookie-Hinweis",
     cookie_text:
@@ -104,8 +110,14 @@ const translations = {
     contact_title: "Let’s talk about your construction project.",
     contact_text:
       "Contact ECB Bau directly by phone, WhatsApp or email.",
+    phone_label: "Phone / WhatsApp",
+    email_label: "Email",
     whatsapp_btn: "Write on WhatsApp",
     email_btn: "Send email",
+
+    footer_rights: "© 2026 ECB Bau. All rights reserved.",
+    footer_location: "Hamburg, Germany",
+    footer_created: "Website created by",
 
     cookie_title: "Cookie Notice",
     cookie_text:
@@ -161,8 +173,14 @@ const translations = {
     contact_title: "İnşaat projeniz hakkında konuşalım.",
     contact_text:
       "ECB Bau ile telefon, WhatsApp veya e-posta üzerinden direkt iletişime geçebilirsiniz.",
+    phone_label: "Telefon / WhatsApp",
+    email_label: "E-posta",
     whatsapp_btn: "WhatsApp’tan yaz",
     email_btn: "E-posta gönder",
+
+    footer_rights: "© 2026 ECB Bau. Tüm hakları saklıdır.",
+    footer_location: "Hamburg, Almanya",
+    footer_created: "Web sitesi",
 
     cookie_title: "Çerez Bildirimi",
     cookie_text:
@@ -190,6 +208,16 @@ const savedLanguage = localStorage.getItem("selectedLanguage");
 
 if (savedLanguage) {
   setLanguage(savedLanguage);
+}
+
+function toggleMenu() {
+  const navMenu = document.getElementById("navMenu");
+  navMenu.classList.toggle("active");
+}
+
+function closeMenu() {
+  const navMenu = document.getElementById("navMenu");
+  navMenu.classList.remove("active");
 }
 
 const animatedElements = document.querySelectorAll(

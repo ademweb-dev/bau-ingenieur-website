@@ -20,12 +20,18 @@
       <img src="images/logo.png" alt="ECB Bau Logo" />
     </a>
 
-    <nav class="nav">
-      <a href="#home" data-i18n="nav_home">Startseite</a>
-      <a href="#about" data-i18n="nav_about">Über uns</a>
-      <a href="#services" data-i18n="nav_services">Leistungen</a>
-      <a href="#projects" data-i18n="nav_projects">Projekte</a>
-      <a href="#contact" data-i18n="nav_contact">Kontakt</a>
+    <button class="menu-toggle" type="button" onclick="toggleMenu()" aria-label="Menü öffnen">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+
+    <nav class="nav" id="navMenu">
+      <a href="#home" onclick="closeMenu()" data-i18n="nav_home">Startseite</a>
+      <a href="#about" onclick="closeMenu()" data-i18n="nav_about">Über uns</a>
+      <a href="#services" onclick="closeMenu()" data-i18n="nav_services">Leistungen</a>
+      <a href="#projects" onclick="closeMenu()" data-i18n="nav_projects">Projekte</a>
+      <a href="#contact" onclick="closeMenu()" data-i18n="nav_contact">Kontakt</a>
     </nav>
 
     <div class="language-switcher">
@@ -194,12 +200,12 @@
 
         <div class="contact-details">
           <p>
-            <span>Telefon / WhatsApp</span>
+            <span data-i18n="phone_label">Telefon / WhatsApp</span>
             <a href="tel:+4917634509138">+49 176 34509138</a>
           </p>
 
           <p>
-            <span>E-Mail</span>
+            <span data-i18n="email_label">E-Mail</span>
             <a href="mailto:emre.canbulut@icloud.com">
               emre.canbulut@icloud.com
             </a>
@@ -229,10 +235,16 @@
   </main>
 
   <footer class="site-footer">
-    <p>© 2026 ECB Bau. Alle Rechte vorbehalten.</p>
-    <p>Hamburg, Deutschland</p>
+    <p data-i18n="footer_rights">
+      © 2026 ECB Bau. Alle Rechte vorbehalten.
+    </p>
+
+    <p data-i18n="footer_location">
+      Hamburg, Deutschland
+    </p>
+
     <p class="designer-credit">
-      Website erstellt von
+      <span data-i18n="footer_created">Website erstellt von</span>
       <a href="https://www.fiverr.com/ademwebdesign" target="_blank">
         Adem Web Design
       </a>
